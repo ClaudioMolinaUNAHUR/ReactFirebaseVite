@@ -8,30 +8,30 @@ import { erroresFirebase } from '../utils/erroresFirebase'
 import { formValidate } from '../utils/formValidate'
 
 const Register = () => {
-        const {registerUser} = useContext(userContext)
-        const {required, patternEmail, minLength, validateTrim, validateEquals} = formValidate()
-        const navigate = useNavigate()
- const name = new type(arguments);
-        const { register, handleSubmit, formState: { errors }, getValues, setError } = useForm({
-            //recordar sacar
-            defaultValues:{
-                email:"claud@mail.com",
-                password:"123123",
-                repassword: "123123"
-            }
-        });
-
-        const onSubmit = async({email, password}) => {
-            try {
-                await registerUser(email, password)
-                navigate('/')
-            } catch (error) {
-                console.log(error);
-                setError('firebase',{
-                    message: erroresFirebase(error.code)
-                });            
-            }
+    const {registerUser} = useContext(userContext)
+    const {required, patternEmail, minLength, validateTrim, validateEqualsPassword} = formValidate()
+    const navigate = useNavigate()
+    
+    const { register, handleSubmit, formState: { errors }, getValues, setError } = useForm({
+        //recordar sacar
+        defaultValues:{
+            email:"claud@mail.com",
+            password:"123123",
+            repassword: "123123"
         }
+    });
+
+    const onSubmit = async({email, password}) => {
+        try {
+            await registerUser(email, password)
+            navigate('/')
+        } catch (error) {
+            console.log(error);
+            setError('firebase',{
+                message: erroresFirebase(error.code)
+            });            
+        }
+    }
 
     return (
         <>
@@ -46,10 +46,9 @@ const Register = () => {
                     {...register("email", { 
                         required,
                         pattern: patternEmail
-                    })}
-                />
-
-                <FormError error={errors.email}/>
+                    })}>
+                    <FormError error={errors.email}/>
+                </FormInput>
                 
                 <FormInput
                     type="password"
@@ -58,20 +57,19 @@ const Register = () => {
                         minLength,
                         validate: validateTrim
                     })}
-                    autoComplete="off"
-                />
-
-                <FormError error={errors.password}/>
+                    autoComplete="off">
+                    <FormError error={errors.password}/>
+                </FormInput>
                 
                 <FormInput
                     type="password"
                     placeholder='Repita el password'
                     {...register("repassword", {
-                        validate: validateEquals(getValues)
-                    }) }
-                />
+                        validate: validateEqualsPassword(getValues)
+                    }) }>
+                    <FormError error={errors.repassword}/>
+                </FormInput>
                 
-                <FormError error={errors.repassword}/>
 
                 <button type='submit'>Register</button>
 

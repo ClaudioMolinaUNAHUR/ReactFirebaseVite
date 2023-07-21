@@ -12,7 +12,7 @@ export const formValidate = () => {
             value:6, 
             message: "minimo 6 caracteres"},
         validateTrim: {trim: v => v.trim() !== "" || "no ingrese espacios"},
-        validateEquals(getValues){
+        validateEqualsPassword(getValues){
             return v => v === getValues("password") || "no coincide la password"
         }
     }
