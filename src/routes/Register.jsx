@@ -6,12 +6,14 @@ import FormInput from '../components/FormInput'
 import { userContext } from '../context/UserProvider'
 import { erroresFirebase } from '../utils/erroresFirebase'
 import { formValidate } from '../utils/formValidate'
+import Title from '../components/title'
+import GenericButton from '../components/GenericButton'
 
 const Register = () => {
     const {registerUser} = useContext(userContext)
-    const {required, patternEmail, minLength, validateTrim, validateEqualsPassword} = formValidate()
     const navigate = useNavigate()
     
+    const {required, patternEmail, minLength, validateTrim, validateEqualsPassword} = formValidate()
     const { register, handleSubmit, formState: { errors }, getValues, setError } = useForm({
         //recordar sacar
         defaultValues:{
@@ -26,16 +28,16 @@ const Register = () => {
             await registerUser(email, password)
             navigate('/')
         } catch (error) {
-            console.log(error);
-            setError('firebase',{
-                message: erroresFirebase(error.code)
-            });            
+            console.log(error.code);
+            const {code, message} = erroresFirebase(error.code)
+            console.log(code, message)
+            setError(code,{ message })       
         }
     }
 
     return (
         <>
-            <h1>register</h1>
+            <Title text="Registración"/>
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <FormError error={errors.firebase}/>
@@ -43,6 +45,7 @@ const Register = () => {
                 <FormInput
                     type="email"
                     placeholder='Ingrese email'
+                    label='Ingrese Email'
                     {...register("email", { 
                         required,
                         pattern: patternEmail
@@ -53,6 +56,7 @@ const Register = () => {
                 <FormInput
                     type="password"
                     placeholder='Ingrese password'
+                    label='Ingrese Contraseña'
                     {...register("password", { 
                         minLength,
                         validate: validateTrim
@@ -64,6 +68,7 @@ const Register = () => {
                 <FormInput
                     type="password"
                     placeholder='Repita el password'
+                    label='Repita Contraseña'
                     {...register("repassword", {
                         validate: validateEqualsPassword(getValues)
                     }) }>
@@ -71,7 +76,7 @@ const Register = () => {
                 </FormInput>
                 
 
-                <button type='submit'>Register</button>
+                <GenericButton text="Registrarse" type="submit"/>
 
             </form>
         </>

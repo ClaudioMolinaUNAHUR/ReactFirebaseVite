@@ -8,7 +8,9 @@ const Navbar = () => {
         try {
             await singOutUser()
         } catch (error) {
-            console.log(error.code)
+            console.log(error.code);
+            const {code, message} = erroresFirebase(error.code)
+            setError(code,{ message })       
         }
     }
   return (
@@ -22,7 +24,7 @@ const Navbar = () => {
             )
             :(
                 <>
-                    <NavLink to="/login">Login</NavLink>
+                    <NavLink to="/login">Login</NavLink> 
                     <NavLink to="/register">Register</NavLink>
                 </> 
             ) 

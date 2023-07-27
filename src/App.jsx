@@ -6,6 +6,7 @@ import RequireAuth from './components/RequireAuth'
 import Register from './routes/register'
 import { useContext } from 'react'
 import { userContext } from './context/UserProvider'
+import LayoutLog from './components/LayoutLog'
 
 const App =() => {
   const {user} = useContext(userContext)
@@ -24,8 +25,10 @@ const App =() => {
                 <Home/>
             </RequireAuth> 
         }/>
-        <Route path='/login' element={ <Login/> }/>
-        <Route path='/register' element={ <Register/> }/>
+        <Route path='/' element={<LayoutLog/>}>          
+          <Route path='/login' element={ <Login/> }/>
+          <Route path='/register' element={ <Register/> }/>
+        </Route>
       </Routes>   
     </> 
   )
