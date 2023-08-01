@@ -8,9 +8,10 @@ import { erroresFirebase } from '../utils/erroresFirebase'
 import { formValidate } from '../utils/formValidate'
 import Title from '../components/title'
 import GenericButton from '../components/GenericButton'
+import ButtonLoading from '../components/ButtonLoading'
 
 const Register = () => {
-    const {registerUser} = useContext(userContext)
+    const {registerUser, loading, setLoading} = useContext(userContext)
     const navigate = useNavigate()
     
     const {required, patternEmail, minLength, validateTrim, validateEqualsPassword} = formValidate()
@@ -25,6 +26,7 @@ const Register = () => {
 
     const onSubmit = async({email, password}) => {
         try {
+            setLoading(true)
             await registerUser(email, password)
             navigate('/')
         } catch (error) {
@@ -32,6 +34,8 @@ const Register = () => {
             const {code, message} = erroresFirebase(error.code)
             console.log(code, message)
             setError(code,{ message })       
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -74,9 +78,11 @@ const Register = () => {
                     }) }>
                     <FormError error={errors.repassword}/>
                 </FormInput>
-                
-
-                <GenericButton text="Registrarse" type="submit"/>
+                {
+                    loading
+                    ? <ButtonLoading/>
+                    : <GenericButton text="Registrarse" type="submit"/>
+                }
 
             </form>
         </>

@@ -7,6 +7,7 @@ export const userContext = createContext()
 const UserProvider = ({children}) => {
 
     const [user, setUser] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(()=>{
         //chequea que exista un usuario logeado en firebase, estructura en la docu de firebase web
@@ -28,7 +29,7 @@ const UserProvider = ({children}) => {
 
     return (
         <userContext.Provider 
-        value={{user, setUser, registerUser, loginUser, singOutUser}}
+        value={{user, setUser, registerUser, loginUser, singOutUser, loading, setLoading}}
         >
             {children}
         </userContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import FormError from '../components/FormError'
@@ -8,10 +8,12 @@ import { erroresFirebase } from '../utils/erroresFirebase'
 import { formValidate } from '../utils/formValidate'
 import Title from '../components/title'
 import GenericButton from '../components/GenericButton'
+import ButtonLoading from '../components/ButtonLoading'
 
 const Login = () => {
 
-    const {loginUser} = useContext(userContext)
+    const {loginUser, loading, setLoading} = useContext(userContext)
+
     const navigate = useNavigate()
     
     const {required, patternEmail, minLength, validateTrim} = formValidate()
@@ -26,6 +28,7 @@ const Login = () => {
   
     const onSubmit = async({email, password}) => {
     try {
+        setLoading(true)
         await loginUser(email, password)
         console.log('usuario logeado');
         navigate('/')
@@ -33,6 +36,8 @@ const Login = () => {
         console.log(error.code);
         const {code, message} = erroresFirebase(error.code)
         setError(code,{ message })       
+    } finally {
+        setLoading(false)
     }
   }
 
@@ -63,8 +68,11 @@ const Login = () => {
                 })}>
                 <FormError error={errors.password}/>
           </FormInput>
-
-          <GenericButton text="Logearse" type="submit"/>
+          {
+            loading 
+            ? <ButtonLoading/>
+            :<GenericButton text="Logearse" type="submit"/>
+        }
         </form>
     </>
   )
