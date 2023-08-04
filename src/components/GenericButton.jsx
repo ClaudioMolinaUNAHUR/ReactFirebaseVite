@@ -1,9 +1,14 @@
 import React from 'react'
+import ButtonLoading from './ButtonLoading'
 
-const GenericButton = ({text, type}) => {
+const GenericButton = ({text, type, color = 'yellow', loading, onClick}) => {
+  color = `text-white bg-${color}-400 hover:bg-${color}-500 focus:outline-none focus:ring-4 focus:ring-${color}-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-${color}-900`
+
+  if (loading) return (<ButtonLoading/>)
   return (
-    <button 
-      className="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
+    <button
+      onClick={onClick}
+      className={color}
       type={type}>
         {text}
     </button>

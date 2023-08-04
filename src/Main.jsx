@@ -10,10 +10,10 @@ import 'flowbite';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <UserProvider>
-    <React.StrictMode>
+    {/* <React.StrictMode> Renderiza de forma intencional 2 veces los componentes*/} 
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </UserProvider>,
 )

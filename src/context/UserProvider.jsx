@@ -12,7 +12,7 @@ const UserProvider = ({children}) => {
     useEffect(()=>{
         //chequea que exista un usuario logeado en firebase, estructura en la docu de firebase web
         const unsuscribe = onAuthStateChanged(auth, (user) =>{
-            console.log(user);
+            //console.log(user);
             if(user){
                 const {email, photoURL, displayName, uid} = user
                 setUser({email, photoURL, displayName, uid})

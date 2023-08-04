@@ -44,46 +44,43 @@ const Register = () => {
             <Title text="Registración"/>
             <form onSubmit={handleSubmit(onSubmit)}>
 
-                <FormError error={errors.firebase}/>
+            <FormError error={errors.firebase}/>
 
-                <FormInput
-                    type="email"
-                    placeholder='Ingrese email'
-                    label='Ingrese Email'
-                    {...register("email", { 
-                        required,
-                        pattern: patternEmail
-                    })}>
-                    <FormError error={errors.email}/>
-                </FormInput>
-                
-                <FormInput
-                    type="password"
-                    placeholder='Ingrese password'
-                    label='Ingrese Contraseña'
-                    {...register("password", { 
-                        minLength,
-                        validate: validateTrim
-                    })}
-                    autoComplete="off">
-                    <FormError error={errors.password}/>
-                </FormInput>
-                
-                <FormInput
-                    type="password"
-                    placeholder='Repita el password'
-                    label='Repita Contraseña'
-                    {...register("repassword", {
-                        validate: validateEqualsPassword(getValues)
-                    }) }>
-                    <FormError error={errors.repassword}/>
-                </FormInput>
-                {
-                    loading
-                    ? <ButtonLoading/>
-                    : <GenericButton text="Registrarse" type="submit"/>
-                }
+            <FormInput
+                type="email"
+                placeholder='Ingrese email'
+                label='Ingrese Email'
+                {...register("email", { 
+                    required,
+                    pattern: patternEmail
+                })}>
+                <FormError error={errors.email}/>
+            </FormInput>
+            
+            <FormInput
+                type="password"
+                placeholder='Ingrese password'
+                label='Ingrese Contraseña'
+                {...register("password", { 
+                    minLength,
+                    validate: validateTrim
+                })}
+                autoComplete="off">
+                <FormError error={errors.password}/>
+            </FormInput>
+            
+            <FormInput
+                type="password"
+                placeholder='Repita el password'
+                label='Repita Contraseña'
+                {...register("repassword", {
+                    validate: validateEqualsPassword(getValues)
+                }) }>
+                <FormError error={errors.repassword}/>
+            </FormInput>
 
+                <GenericButton text="Logearse" type="submit" loading={loading}/>
+                
             </form>
         </>
     )

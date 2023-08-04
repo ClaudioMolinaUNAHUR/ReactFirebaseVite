@@ -45,9 +45,9 @@ const Login = () => {
     <>
         <Title text="Inicio Sesión"/>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormError error={errors.firebase}/>
+            <FormError error={errors.firebase}/>
 
-          <FormInput
+            <FormInput
                 type="email"
                 placeholder='Ingrese email'
                 label='Ingrese Email'
@@ -56,9 +56,9 @@ const Login = () => {
                     pattern: patternEmail
                 })}>
                 <FormError error={errors.email}/>
-          </FormInput>
+            </FormInput>
 
-          <FormInput
+            <FormInput
                 type="password"
                 placeholder='Ingrese password'
                 label='Ingrese Contraseña'
@@ -67,12 +67,10 @@ const Login = () => {
                     validate: validateTrim
                 })}>
                 <FormError error={errors.password}/>
-          </FormInput>
-          {
-            loading 
-            ? <ButtonLoading/>
-            :<GenericButton text="Logearse" type="submit"/>
-        }
+            </FormInput>
+            
+            <GenericButton text="Logearse" type="submit" loading={loading}/>
+            
         </form>
     </>
   )
