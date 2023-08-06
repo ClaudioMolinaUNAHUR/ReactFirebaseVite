@@ -51,8 +51,7 @@ const Home = () => {
                 ?<GenericButton
                     type='submit'
                     text="Edit"
-                    color='yellow'
-                    loading={loading[`update${idUrlModified}`]}/>
+                    loading={loading.update}/>
                 :<GenericButton
                     type='submit'
                     text="Add URL"
@@ -67,7 +66,7 @@ const Home = () => {
             <p>{item.origin}</p>
             <p>{item.userid}</p>
             <GenericButton type="button" text="Delete" color='red' loading={loading[item.nanoid]} onClick={()=> handleDelete(item.nanoid)}/>
-            <GenericButton type="button" text="Update" color='yellow' loading={false} onClick={()=> handleUpdate(item)}/>
+            <GenericButton type="button" text="Update" onClick={()=> handleUpdate(item)}/>
           </div>
         ))
        }
