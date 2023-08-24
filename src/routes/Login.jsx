@@ -8,7 +8,6 @@ import { erroresFirebase } from '../utils/erroresFirebase'
 import { formValidate } from '../utils/formValidate'
 import Title from '../components/title'
 import GenericButton from '../components/GenericButton'
-import ButtonLoading from '../components/ButtonLoading'
 
 const Login = () => {
 
@@ -24,8 +23,7 @@ const Login = () => {
             password:"123123"
         }
     });
-
-  
+    
     const onSubmit = async({email, password}) => {
     try {
         setLoading(true)

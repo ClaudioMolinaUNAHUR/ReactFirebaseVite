@@ -1,4 +1,4 @@
-import { collection, deleteDoc, doc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore/lite"
+import { collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore/lite"
 import { useState } from "react"
 import { db, auth } from "../firebase"
 import { nanoid } from 'nanoid'
@@ -73,7 +73,19 @@ export const useFirestore = () => {
         }
     }
 
+    const searchData = async(nanoid) => {
+        try {
+            const dataRef = doc(db, "Urls", nanoid)
+            const querySnapshot = await getDoc(dataRef) //llama datos de una entidad en la bd de firebase
+            console.log(querySnapshot)
+
+            return querySnapshot
+        } catch (error) {
+            setError(error.message)
+        }
+    }
 
 
-    return {data, error, loading, getData: readData, createData, delData, updateData}
+
+    return {data, error, loading, readData, createData, delData, updateData, searchData}
 }

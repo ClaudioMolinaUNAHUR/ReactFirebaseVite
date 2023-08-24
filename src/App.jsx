@@ -8,9 +8,11 @@ import Register from './routes/register'
 import Login from './routes/Login'
 import Perfil from './routes/Perfil'
 
-import Navbar from './components/Navbar'
 import LayoutRequireAuth from './components/layouts/LayoutRequireAuth'
 import LayoutLog from './components/layouts/LayoutLog'
+import LayoutRedirect from './components/layouts/LayoutRedirect'
+
+import Navbar from './components/Navbar'
 import NotFound from './routes/NotFound'
 
 const App =() => {
@@ -34,7 +36,10 @@ const App =() => {
                     <Route path='/register' element={ <Register/> }/>
                 </Route>
 
-                <Route path="*" element={<NotFound/>}/>
+                <Route path='/:nanoid' element={<LayoutRedirect/>}>
+                    <Route path="*" element={<NotFound/>}/>
+                </Route>
+
             </Routes>   
         </> 
     )

@@ -8,7 +8,6 @@ import { erroresFirebase } from '../utils/erroresFirebase'
 import { formValidate } from '../utils/formValidate'
 import Title from '../components/title'
 import GenericButton from '../components/GenericButton'
-import ButtonLoading from '../components/ButtonLoading'
 
 const Register = () => {
     const {registerUser, loading, setLoading} = useContext(userContext)
@@ -30,9 +29,7 @@ const Register = () => {
             await registerUser(email, password)
             navigate('/')
         } catch (error) {
-            console.log(error.code);
             const {code, message} = erroresFirebase(error.code)
-            console.log(code, message)
             setError(code,{ message })       
         } finally {
             setLoading(false)
