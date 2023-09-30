@@ -1,3 +1,4 @@
+import { async } from '@firebase/util'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -19,7 +20,7 @@ const LayoutRedirect = () => {
         }
     }, [])
 
-    if(loading) return <Title text="Waiting redirect..."/>
+    if(loading) return <Title text={"Waiting redirect..."}/>
 
     return (
         <div className='container mx-auto'>

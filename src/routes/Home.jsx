@@ -56,7 +56,7 @@ const Home = () => {
         }
     }
 
-  if(loading.get) return <p>Loading Data...</p>
+  if(loading.get) return <Title text={"Loading Data..."}/>
   if(error) return <p> {error}</p>
   
   return (

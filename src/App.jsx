@@ -22,7 +22,7 @@ const App =() => {
         return <p>Loading...</p>
     }
 
-    return (
+    return ( 
         <>
             <Navbar/>  
             <Routes>
@@ -37,7 +37,7 @@ const App =() => {
                 </Route>
 
                 <Route path='/:nanoid' element={<LayoutRedirect/>}>
-                    <Route path="*" element={<NotFound/>}/>
+                    <Route index element={<NotFound/>}/>
                 </Route>
 
             </Routes>   
